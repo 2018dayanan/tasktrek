@@ -33,26 +33,28 @@ const TaskForm = () => {
     const selectTag = (tag) => {
         if (taskData.tags.some(item => item === tag)) {
             const filterTags = taskData.tags.filter(item => item !== tag)
-            setTaskData(prev => {
+            setTaskData((prev) => {
                 return { ...prev, tags: filterTags }
             })
         } else {
-            setTaskData(prev => {
+            setTaskData((prev) => {
                 return { ...prev, tags: [...prev.tags, tag] };
             })
         }
     }
-    console.log(taskData.tags);
+    const checkTag = (tag) => {
+        return taskData.tags.some(item => item === tag)
+    }
     return (
         <header className="app_header">
             <form action="" onSubmit={handleSubmit}>
                 <input type="text" name="task" className='task_input' placeholder='Enter Your Task' onChange={handleChange} />
                 <div className='task_form_bottom_line'>
                     <div>
-                        <Tag tagname="HTML" selectTag={selectTag}></Tag>
-                        <Tag tagname="CSS" selectTag={selectTag}></Tag>
-                        <Tag tagname="JS" selectTag={selectTag}></Tag>
-                        <Tag tagname="React" selectTag={selectTag}></Tag>
+                        <Tag tagname="HTML" selectTag={selectTag} selected={checkTag("HTML")}></Tag>
+                        <Tag tagname="CSS" selectTag={selectTag} selected={checkTag("CSS")}></Tag>
+                        <Tag tagname="JS" selectTag={selectTag} selected={checkTag("JS")}></Tag>
+                        <Tag tagname="React" selectTag={selectTag} selected={checkTag("React")}></Tag>
                     </div>
                     <div>
                         <select className='task_status' name="status" onChange={handleChange}>
