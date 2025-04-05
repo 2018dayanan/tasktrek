@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import "./Tag.css";
 
 const Tag = ({ tagname, selectTag, selected }) => {
@@ -8,10 +8,23 @@ const Tag = ({ tagname, selectTag, selected }) => {
         JS: { backgroundColor: "#ffd12c" },
         React: { backgroundColor: "#4cdafc" },
         default: { backgroundColor: "#f9f9f9" }
-    }
+    };
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        selectTag(tagname);
+    };
+
     return (
-        <button className='tag' onClick={() => selectTag(tagname)} style={selected ? tagStyle[tagname] : tagStyle.default}>{tagname}</button>
-    )
-}
+        <button
+            type="button"
+            className='tag'
+            onClick={handleClick}
+            style={selected ? tagStyle[tagname] : tagStyle.default}
+        >
+            {tagname}
+        </button>
+    );
+};
 
 export default Tag;
