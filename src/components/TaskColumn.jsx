@@ -3,7 +3,7 @@ import React from 'react';
 import './TaskColumn.css';
 import TaskCard from './TaskCard';
 
-const TaskColumn = ({ title, icon, tasks = [], status }) => {
+const TaskColumn = ({ title, icon, tasks = [], status, handleDelete }) => {
     // Add console.log to debug
     console.log(`Tasks in ${title} column:`, tasks);
 
@@ -21,6 +21,8 @@ const TaskColumn = ({ title, icon, tasks = [], status }) => {
                             key={index}
                             title={task.task}
                             tags={task.tags}
+                            handleDelete={handleDelete}
+                            index={index}
                         />
                     ))
             ) : (

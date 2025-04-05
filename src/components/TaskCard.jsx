@@ -2,7 +2,7 @@ import React from 'react'
 import "./TaskCard.css";
 import Tag from "./Tag";
 import deleteIcon from '../assets/delete.png';
-function TaskCard({ title, tags }) {
+function TaskCard({ title, tags, handleDelete, index }) {
     return (
         <article className="task_card">
             <p className="task_text">{title}</p>
@@ -12,7 +12,7 @@ function TaskCard({ title, tags }) {
                         tags.map((tag, index) => <Tag key={index} tagname={tag} selected></Tag>)
                     }
                 </div>
-                <div className="task_delete">
+                <div className="task_delete" onClick={() => handleDelete(index)}>
                     <img src={deleteIcon} alt='Delete Icon' className='delete_icon' />
                 </div>
             </div>
