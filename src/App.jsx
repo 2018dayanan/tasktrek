@@ -1,5 +1,4 @@
-// App.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./App.css";
 import TaskForm from './components/TaskForm';
 import TaskColumn from './components/TaskColumn';
@@ -8,13 +7,21 @@ import doingIcon from './assets/glowing-star.png';
 import doneIcon from './assets/check-mark-button.png';
 
 const App = () => {
-  const [tasks, setTasks] = useState([]);
-  console.log("Current tasks:", tasks);
-  const handleDelete = (taskIndex) => {
+  const [tasks, setTasks] = useState(() => {
+    const oldTasks = localStorage.getItem("tasks");
+    return oldTasks ? JSON.parse(oldTasks) : [];
+  });
 
-    const newTasks = tasks.filter((task, index) => index !== taskIndex);
-    setTasks(newTasks)
-  }
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
+
+  const handleDelete = (taskIndex) => {
+    const newTasks = tasks.filter((_, index) => index !== taskIndex);
+    setTasks(newTasks);
+  };
+
   return (
     <div className='app'>
       <TaskForm setTasks={setTasks} />
